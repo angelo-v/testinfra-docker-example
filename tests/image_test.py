@@ -12,4 +12,9 @@ def test_current_user_is_jenkins(User):
     assert User().group == "jenkins"
 
 def test_jenkins_is_running(Process):
-    assert Process.get(user="jenkins", comm="java").args == "java -jar /usr/share/jenkins/jenkins.war"
+    jenkins = Process.get(comm="java")
+    assert jenkins.args == "java -jar /usr/share/jenkins/jenkins.war"
+    assert jenkins.user == "jenkins"
+
+def test_maven_is_installed(Package):
+    assert Package("maven").is_installed
