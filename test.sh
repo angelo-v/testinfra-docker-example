@@ -1,1 +1,1 @@
-testinfra --connection=docker --hosts=jenkins_test_container
+testinfra --verbose --disable-pytest-warnings --connection=docker --hosts=jenkins_test_container
