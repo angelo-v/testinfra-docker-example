@@ -7,14 +7,14 @@ def container(client, image):
     yield container
     container.remove(force=True)
 
-def test_current_user_is_jenkins(User):
-    assert User().name == "jenkins"
-    assert User().group == "jenkins"
+def test_current_user_is_jenkins(host):
+    assert host.user().name == "jenkins"
+    assert host.user().group == "jenkins"
 
-def test_jenkins_is_running(Process):
-    jenkins = Process.get(comm="java")
+def test_jenkins_is_running(host):
+    jenkins = host.process.get(comm="java")
     assert jenkins.args == "java -jar /usr/share/jenkins/jenkins.war"
     assert jenkins.user == "jenkins"
 
-def test_maven_is_installed(Package):
-    assert Package("maven").is_installed
+def test_maven_is_installed(host):
+    assert host.package("maven").is_installed
